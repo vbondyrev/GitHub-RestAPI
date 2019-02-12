@@ -17,7 +17,8 @@ Developed:
 
 Underdeveloped on release version 2.0
 -	Pagination unresolved yet
--	README.md
+-	Deatail README.md
 -	Connection with Mongo DB service temporary  disabled, but code realized
+    -   Trouble with MongoDB service  will solved in next api version
 -	Dockerize application  and represent on AWS (ES3) instance
--	Trouble with MongoDB service  will solved in next api version(sсreen)
+
