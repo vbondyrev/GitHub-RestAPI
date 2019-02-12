@@ -3,16 +3,16 @@ Simple RESTAPI with templates and MongoDB connection
 
 Developed:
 -	Rest API architecture
-  -	Ability to  view TOP Star repository
-  -	Ability to view personal account with detail info
+    -	Ability to  view TOP Star repository
+    -	Ability to view personal account with detail info
 -	Flask fronted:
-  -	 As template engine  Jinja2
-  -	For style -  bootswatch.com – free themes
+    -	 As template engine  Jinja2
+    -	For style -  bootswatch.com – free themes
 -	Logic working with MongoDB (save/read)
 -	Full JSON support
 -	Sorting by Star rank:
-  -	Inside request query
-  -	On template level, when show top repos 
+    -	Inside request query
+    -	On template level, when show top repos 
 
 
 Underdeveloped on release version 2.0
