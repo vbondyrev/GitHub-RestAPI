@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    restart: always
+    ports:
+     - "5000:5000"
+  mongo:
+    image: mongo:3.4
+    ports:
+      - "27018:27017"
+ # I changed on 27018 port because have same db on localhost:27017
+ 
+ # if we need save data after stopping services
+ #   volumes:
+ #     - db_data:/var/lib/mongodb
+    restart: always
+    #environment:
+      #MONGO_INITDB_ROOT_USERNAME: root
+      #MONGO_INITDB_ROOT_PASSWORD: example
+      #MONGO_INITDB_DATABASE: git_db
