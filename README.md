@@ -1,12 +1,11 @@
 # GitHub-RestAPI
-
+```	
 Overview
 	REST API for fetching GitHub Api data.
 	Building in docker-compose (MongoDB+Python) and deploying on free linux AWS instance (t2.micro/EC2 service):
 		http://ec2-3-92-229-25.compute-1.amazonaws.com:5000/
-	In this case with ugly frontend :)
 	Aslo project could be rebuild sepearately on localhost with nice frontend based on Jinja2/bootswatch style
-		http://127.0.0.1:5000/
+		http://127.0.0.1:5000/`
 
 Features
 	Overview top 10 stars list github repository
