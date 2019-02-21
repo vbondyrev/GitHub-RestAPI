@@ -1,5 +1,66 @@
 # GitHub-RestAPI
-Simple RESTAPI with templates and MongoDB connection
+Overview
+	REST API 
+	with docker-compose service(MongoDB+Python)
+
+Requirements
+	Python 3.4+
+	VirtualEnv
+
+Features
+	Overview top 10 list github repository
+	Overview all repository with stars rate over 500 stars
+	Opportunity check datail info by git hub account login
+
+Installing
+	1. run seperatly without 
+		1.1. istall all project dependencies 
+			pip install -r requirements.txt
+	
+    1.1. Make sure you have virtualenv and Python3 installed on your system (pip3 install virtualenv)
+    1.2. Clone the repo: git clone https://github.com/vbondyrev/GitHub-RestAPI
+    1.3. Install the virtualenv: cd apisrv; virtualenv venv
+    1.4. Activate the virtual environment: source venv/bin/activate
+    1.5. Install Python Requirements: pip3 install -r requirements.txt
+	
+	2. run inside docker-compose
+	    2.1. Make sure you have docker-compose installed on your system (pip3 install virtualenv)
+		docker-compose -f docker-compose.yml up
+	
+
+
+Testing
+http://flask.pocoo.org/docs/1.0/testing/
+Example
+https://stackoverflow.com/questions/41718376/how-to-apply-integration-tests-rather-than-unit-tests-to-a-flask-restful-api
+https://stackoverflow.com/questions/28836893/how-to-send-requests-with-jsons-in-unit-tests
+
+REST API
+
+
+
+As we can see from the code we have 2 GET requests and 1 POST request.
+
+    Getting all data in the collection: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Developed:
 -	Rest API architecture
