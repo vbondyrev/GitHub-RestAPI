@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import requests
-from flask import Flask, render_template, request, jsonify, url_for, redirect  # Response
+from flask import Flask, render_template, request, jsonify, url_for, redirect, json
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -10,17 +10,16 @@ app = Flask(__name__)
 # https://developer.github.com/v3/search/#about-the-search-api
 
 # URL`s and headers with token
-url_query_sorted_p1 = 'https://api.github.com/search/repositories?q=+language:python+stars:>2000&sort=stars&page=1&per_page=100'
-url_query_top10 = 'https://api.github.com/search/repositories?q=+language:python+stars:>=20000&sort=stars&order=desc&page=1&per_page=10'
+url_query_sorted_p1 = 'https://api.github.com/search/repositories?q=+language:python+stars:>3000&sort=stars&page=1&per_page=100'
+url_query_top10 = 'https://api.github.com/search/repositories?q=+language:python&sort=stars&order=desc&page=1&per_page=10'
 url_users = 'https://api.github.com/users/'
 
-headers = {'authToken': '922de9f974e83725bd3b41b6c78460159f21c426'}
+headers = {'authToken': '844b11b1bcf8d242f7791d4daf718360c52fef5b'}
 
 # init connection to MongoDB
-uri_prod = "mongodb://localhost:27017/git_db"
 try:
-    conn = MongoClient("mongodb://mongo:27017/", connect=False)
-    # conn = MongoClient("mongodb://localhost:27017/git_db", connect=False) # DEVENV
+    conn = MongoClient("mongodb://mongo:27017/", connect=False)              # PROD_ENV
+    # conn = MongoClient("mongodb://localhost:27017/git_db", connect=False)  # DEV_ENV
     db = conn["git_db"]
     coll = db["git_col"]
 except ConnectionError as e:
@@ -44,17 +43,19 @@ def mongo_save():
     """
     coll.drop()
 
-    # start = time()
-    res = requests.get(url_query_sorted_p1, headers=headers)
-    repos = res.json()
-    repos_list = repos['items']
-
-    # pagination - fetch 1000 repositories with 100 per requests with authToken.( By default 30)
-    while 'next' in res.links.keys():
-        res = requests.get(res.links['next']['url'], headers=headers)
+    try:
+        # start = time()
+        res = requests.get(url_query_sorted_p1, headers=headers)
         repos = res.json()
-        # res_list_new = repos_new['items']
-        repos_list.extend(repos['items'])
+        repos_list = repos['items']
+
+        # pagination - fetch 1000 repositories with 100 per requests with authToken.(By default 30, without auth-n)
+        while 'next' in res.links.keys():
+            res = requests.get(res.links['next']['url'], headers=headers)
+            repos = res.json()
+            repos_list.extend(repos['items'])
+    except ConnectionError as e:
+        print(jsonify({'Error message:': e}))
 
     output = []
     for item in repos_list:
@@ -95,10 +96,12 @@ def mongo_del():
     """ Delete collection from Mongo DB
     """
     coll.drop()
-    message = {
+    text = {
         'status': '200',
         'message': 'All rows from MongoDB - deleted'}
-    return render_template("del.html", repos=jsonify(message))
+    message = json.dumps(text)
+
+    return render_template("del.html", repos=message)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -112,11 +115,11 @@ def index():
         return redirect(url_for('.user_detail', user_name=github_username))
 
     else:
-        response = requests.get(url_query_top10, headers=headers)
+        response = requests.get(url_query_top10)
         resp_dict = response.json()
         resp_list = resp_dict['items']
         return render_template("index.html", repos=resp_list)
 
 
 if __name__ == '__main__':
-    app.run(debug=False, threaded=False, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=False)

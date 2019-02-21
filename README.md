@@ -25,17 +25,26 @@ Installing
 	
 	2. run inside docker-compose
 	    2.1. Make sure you have docker-compose installed on your system (pip3 install virtualenv)
-		docker-compose -f docker-compose.yml up
-	
+		2.2. Run in the same folder
+			docker-compose -f docker-compose.yml up
+		2.3 Open on browser:
+		
 
+1. Add testing using unit-tests
 
 Testing
 http://flask.pocoo.org/docs/1.0/testing/
 Example
 https://stackoverflow.com/questions/41718376/how-to-apply-integration-tests-rather-than-unit-tests-to-a-flask-restful-api
 https://stackoverflow.com/questions/28836893/how-to-send-requests-with-jsons-in-unit-tests
+2. Upadate docher-copose file 
+	and change Authentication to MongoDB (will use  /docker-entrypoint-initdb.d/*.js
+Detаils here
+https://docs.docker.com/samples/library/mongo/
 
-REST API
+3. Deploy this project on AWS (ES3) instance
+
+4. Will add code for change environtment more simplify (Dev config/ Prod config)
 
 
 
