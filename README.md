@@ -1,13 +1,13 @@
 # GitHub-RestAPI
-```	
-Overview
+
+### Overview
 	REST API for fetching GitHub Api data.
 	Building in docker-compose (MongoDB+Python) and deploying on free linux AWS instance (t2.micro/EC2 service):
 		http://ec2-3-92-229-25.compute-1.amazonaws.com:5000/
 	Aslo project could be rebuild sepearately on localhost with nice frontend based on Jinja2/bootswatch style
 		http://127.0.0.1:5000/`
 
-Features
+### Features
 	Overview top 10 stars list github repository
 	Opportunity check detail info by git hub account login
 	Overview all repository with stars rate over 2000 stars
@@ -17,7 +17,7 @@ Features
 	I will resolve it in next version.)
 	Use pagination per page when fetching github api data.
 
-Installing
+### Installing
 	1. run seperatly on localhost
 
 		1.1. Make sure you have virtualenv and Python3 installed on your system (pip3 install virtualenv)
@@ -37,7 +37,7 @@ Installing
 	    2.3. Run this script:
 		 docker-compose -f docker-compose.yml up
 
-Endpoints
+### Endpoints
 	1. Start page with top 10 stars list github repository
 		http://127.0.0.1:5000/
 		http://127.0.0.1:5000/index
@@ -59,10 +59,7 @@ Endpoints
 		http://127.0.0.1:5000/db/del		
 
 
-Underdeveloped on release version 1.3.0
-	1. Pagination in template;
-	2. Create unittest/pytest;
-	3. Edit style this one Readme;
-	4. Solve bug with Personal access tokens.
+### Underdeveloped on next release version
+	See TODO.md file [TODO.md](https://pages.github.com/)
 
 Thanks and have a nice day! :)
