@@ -19,24 +19,24 @@ I got the email from github:
 
 ### Installing
 1. __Run seperatly on localhost__ \
-1.1. Make sure you have virtualenv and Python3 installed on your system 
+* 1.1. Make sure you have virtualenv and Python3 installed on your system 
 ```
 pip3 install virtualenv
 ```
-1.2. Clone the repo: 
+* 1.2. Clone the repo: 
 ```
 git clone https://github.com/vbondyrev/GitHub-RestAPI
 ```
-1.3. Install the virtualenv: virtualenv venv \
-1.4. Activate the virtual environment: 
+* 1.3. Install the virtualenv: virtualenv venv \
+* 1.4. Activate the virtual environment: 
 ```
 source venv/bin/activate
 ```
-1.5. Install Python Requirements: 
+* 1.5. Install Python Requirements: 
 ```
 pip3 install -r requirements.txt 
 ```
-1.6. Uncomment this row:
+* 1.6. Uncomment this row:
 ```
 conn = MongoClient("mongodb://localhost:27017/git_db", connect=False)  # DEV_ENV
 ```
@@ -44,12 +44,17 @@ conn = MongoClient("mongodb://localhost:27017/git_db", connect=False)  # DEV_ENV
 			[http://127.0.0.1:5000/](http://127.0.0.1:5000/) 
 
 2. __Run inside docker-compose__ \
-2.1. Make sure you have docker-compose installed on your system \
-2.2. Clone the repo: \
+* 2.1. Make sure you have docker-compose installed on your system \
+* 2.2. Clone the repo: \
 ```
 git clone https://github.com/vbondyrev/GitHub-RestAPI
 ```
-2.3. From folder with project run this script:
+* 2.3. From folder with project run this script:
 ```
 docker-compose -f docker-compose.yml up
 ```
+### Endpoints
+ All endpoints published via Postman requests:
+ * [https://documenter.getpostman.com/view/5674149/S11GSLAh](https://documenter.getpostman.com/view/5674149/S11GSLAh)
+### Future developments
+ * [See TODO.md](https://github.com/vbondyrev/GitHub-RestAPI/blob/master/TODO.md)
