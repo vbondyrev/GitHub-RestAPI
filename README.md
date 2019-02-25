@@ -45,7 +45,7 @@ conn = MongoClient("mongodb://localhost:27017/git_db", connect=False)  # DEV_ENV
 
 2. __Run inside docker-compose__
 * 2.1. Make sure you have docker-compose installed on your system
-* 2.2. Clone the repo: \
+* 2.2. Clone the repo:
 ```
 git clone https://github.com/vbondyrev/GitHub-RestAPI
 ```
