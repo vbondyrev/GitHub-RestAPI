@@ -18,7 +18,7 @@ I got the email from github:
 > A new token will need to be generated in order to continue using OAuth to authenticate to GitHub."
 
 ### Installing
-1. __Run seperatly on localhost__ \
+1. __Run seperatly on localhost__
 * 1.1. Make sure you have virtualenv and Python3 installed on your system 
 ```
 pip3 install virtualenv
@@ -27,7 +27,7 @@ pip3 install virtualenv
 ```
 git clone https://github.com/vbondyrev/GitHub-RestAPI
 ```
-* 1.3. Install the virtualenv: virtualenv venv \
+* 1.3. Install the virtualenv: virtualenv venv
 * 1.4. Activate the virtual environment: 
 ```
 source venv/bin/activate
@@ -40,11 +40,11 @@ pip3 install -r requirements.txt
 ```
 conn = MongoClient("mongodb://localhost:27017/git_db", connect=False)  # DEV_ENV
 ```
-1.7. Run app.py and check this endpoint: \
+* 1.7. Run app.py and check this endpoint:
 			[http://127.0.0.1:5000/](http://127.0.0.1:5000/) 
 
-2. __Run inside docker-compose__ \
-* 2.1. Make sure you have docker-compose installed on your system \
+2. __Run inside docker-compose__
+* 2.1. Make sure you have docker-compose installed on your system
 * 2.2. Clone the repo: \
 ```
 git clone https://github.com/vbondyrev/GitHub-RestAPI
@@ -58,3 +58,5 @@ docker-compose -f docker-compose.yml up
  * [https://documenter.getpostman.com/view/5674149/S11GSLAh](https://documenter.getpostman.com/view/5674149/S11GSLAh)
 ### Future developments
  * [See TODO.md](https://github.com/vbondyrev/GitHub-RestAPI/blob/master/TODO.md)
+ 
+ _Thanks for attention and have a nice day! :)_
