@@ -8,40 +8,37 @@
     <!--https://getbootstrap.com/docs/4.3/getting-started/download/-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
     <title>Github Stars rate analyzer</title>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"-->
-            <!--aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">-->
-        <!--<span class="navbar-toggler-icon"></span>-->
-    <!--</button>-->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
     <br>
     <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/db/save">Save to DB</a>
+            <!--MY DROPDOWN-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="download">MongoDB <span class="caret"></span></a>
+              <div class="dropdown-menu" aria-labelledby="download">
+                <a class="dropdown-item" href="/db/save" title="Stars rate > 5000">Save records with highest rate</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/db/json">Get response with JSON</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/db/delete">Clear DB</a>
+              </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/db/delete">Clear DB</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/vbondyrev/GitHub-RestAPI/blob/master/README.md#github-restapi" title="README.md on my GitHub">About</a>
             </li>
         </ul>
     </div>
 </nav>
-
     <br>
-
+    <br>
 <body>
-
+    <br>
 <div class="container searchContainer">
 
     <div class="search card card-body">
@@ -63,43 +60,43 @@
         <div class="card card-body mb-3">
             <div class="row">
                 <div class="col-md-3">
-                    <img class="img-fluid mb-2" src="{{profile.avatar_url}}">
-                    <h3> User account name:
-                        <h2><p class="text-success"><strong>{{profile.login}}</strong></p></h2>
-                    </h3>
-                    <a href="{{profile.html_url}}" target="_blank" class="btn btn-primary btn-block mb-4">View Profile
-                        on Git Hub</a>
+                    <img class="img-thumbnail" src="{{profile.avatar_url}}">
                 </div>
-                <div class="col-md-9">
-                    <span class="badge badge-primary">Number of repositories: {{profile.public_repos}} </span>
+                <div class="col-md-3">
+                    <h5> User name:
+                        <h3><p class="text-success"><strong>{{profile.login}}</strong></p></h3>
+                    </h5>
+                    <button type="button" class="btn btn-outline-primary"><a href="{{profile.html_url}}">View Profile on GitHub</a></button>
+                </div>
+                <div class="col-md-6">
+                    <span class="badge badge-secondary">Number of repositories: {{profile.public_repos}} </span>
                     <span class="badge badge-secondary">Number of Gist: {{profile.public_gists}} </span>
-                    <span class="badge badge-success">Follower: {{profile.followers}} </span>
-                    <span class="badge badge-info">Followed: {{profile.following}}</span>
+                    <span class="badge badge-secondary">Follower: {{profile.followers}} </span>
+                    <span class="badge badge-secondary">Followed: {{profile.following}}</span>
                     <br><br>
-
                 </div>
             </div>
         </div>
-        <br>
         <div id="repos" style="margin-bottom: 100px;">
-            <h3 class="page-heading mb-3">All user repositories by STARS rate: </h3>
+            <h3 class="page-heading mb-3">All user repositories order by STARS rate: </h3>
             {% for repo in repos|sort(attribute='stargazers_count', reverse = True) %}
             <div class="card card-body mb-2">
                 <div class="row">
                     <div class="col-md-6">
-                        <span><strong>{{repo.name}}</strong></span>
-                        <a href="{{repo.html_url}}" target="_blank" class="card-link"> Link </a>
+                        <h5><span><strong>{{repo.name}}</strong></span></h5>
+                        <button type="button" class="btn btn-outline-primary"><a href="{{repo.html_url}}">Link to repositories</a></button>
+                        <br>
+                        <br>
+                        <h5><span class="badge badge-success">Stars:</span>  {{repo.stargazers_count}}</h5>
                     </div>
                     <div class="col-md-6">
-                        <span class="badge badge-success">Full name:  {{repo.full_name}}</span>
+                        <span class="badge badge-primary">Full name:</span>  {{repo.full_name}}
                         <br>
-                        <span class="badge badge-info">Stars:  {{repo.stargazers_count}}</span>
+                        <span class="badge badge-primary">Url:</span>  {{repo.url}}
                         <br>
-                        <span class="badge badge-success">Url:  {{repo.url}}</span>
+                        <span class="badge badge-primary">Language:</span>  {{repo.language}}
                         <br>
-                        <span class="badge badge-success">Language:  {{repo.language}}</span>
-                        <br>
-                        <span class="badge badge-success">Description:  {{repo.description}}</span>
+                        <strong>Description:</strong>  {{repo.description}}
                     </div>
                 </div>
             </div>
@@ -119,5 +116,8 @@
 
 </div>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
