@@ -3,7 +3,7 @@
 REST API for fetching GitHub Api data.
 ### Overview
   * Building in docker-compose (MongoDB+Python) and deploying on free linux AWS instance (t2.micro/EC2 service):  
-[http://ec2-3-92-229-25.compute-1.amazonaws.com:5000/](http://ec2-3-92-229-25.compute-1.amazonaws.com:5000/)
+[http://ec2-52-207-234-223.compute-1.amazonaws.com:5000/](http://ec2-52-207-234-223.compute-1.amazonaws.com:5000/)
 * Aslo project could be rebuild sepearately on localhost:
 		[http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 ### Features
