@@ -23,3 +23,8 @@ services:
       #MONGO_INITDB_ROOT_USERNAME: root
       #MONGO_INITDB_ROOT_PASSWORD: example
       #MONGO_INITDB_DATABASE: git_db
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
+    restart: always

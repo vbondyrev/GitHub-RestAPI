@@ -6,8 +6,15 @@ import requests
 from flask import Flask, render_template, request, jsonify, url_for, redirect, \
     json, Response
 from pymongo import MongoClient
+from flask_caching import Cache
 
 app = Flask(__name__)
+
+# define the cache config keys, remember that it can be done in a settings file
+app.config['CACHE_TYPE'] = 'simple'
+
+# # register the cache instance and binds it on to your app
+app.cache = Cache(app)
 
 # Official limit - the GitHub Search API
 # provides up to 1,000 results for each search.
@@ -15,7 +22,7 @@ app = Flask(__name__)
 
 # URL`s and headers with token
 url_query_sorted_p1 = 'https://api.github.com/search/repositories?q=+language' \
-                      ':python+stars:>5000&sort=stars&page=1&per_page=100'
+                      ':python+stars:>10000&sort=stars&page=1&per_page=100'
 url_query_top10 = 'https://api.github.com/search/repositories?q=+language' \
                   ':python&sort=stars&order=desc&page=1&per_page=10'
 url_users = 'https://api.github.com/users/'
@@ -24,8 +31,8 @@ headers = {"authToken": "844b11b1bcf8d242f7791d4daf718360c52fef5b"}
 
 # init connection to MongoDB
 try:
-    conn = MongoClient("mongodb://mongo:27017/")  # PROD_ENV
-    # conn = MongoClient("mongodb://localhost:27017/git_db")  # DEV_ENV
+    # conn = MongoClient("mongodb://mongo:27017/")  # PROD_ENV
+    conn = MongoClient("mongodb://localhost:27017/git_db")  # DEV_ENV
     db = conn["git_db"]
     coll = db["git_col"]
 except ConnectionError as e:
@@ -44,6 +51,7 @@ def mongo_get():
 
 
 @app.route("/db/save")
+@app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def mongo_save():
     """ Save result of requests to collection Mongo DB
     """
@@ -94,16 +102,17 @@ def mongo_del():
 
 
 @app.route("/db/json")
+@app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def mongo_json():
     """ Fetch all records from MongoDB as Response with JSON
     """
     output = []
     for item in coll.find({}):
-        output.append({"id": item["id"],\
-                       "full_name": item["full_name"],\
-                       "url": item["url"],\
-                       "description": item["description"],\
-                       "stargazers_count": item["stargazers_count"],\
+        output.append({"id": item["id"], \
+                       "full_name": item["full_name"], \
+                       "url": item["url"], \
+                       "description": item["description"], \
+                       "stargazers_count": item["stargazers_count"], \
                        "language": item["language"]
                        })
 
@@ -112,6 +121,7 @@ def mongo_json():
 
 
 @app.route("/user/<string:user_name>")
+@app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def user_detail(user_name):
     """ Get info about user and detail info about his repo.
     """
@@ -131,6 +141,7 @@ def user_detail(user_name):
 
 @app.route("/", methods=["GET", "POST"])
 @app.route("/index", methods=["GET", "POST"])
+@app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def index():
     """ By default -  "GET" info about TOP 10 stars repo.
         POST -  get info about user
@@ -147,4 +158,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=True)
+    # app.run(host='0.0.0.0', port=5000, debug=True)
