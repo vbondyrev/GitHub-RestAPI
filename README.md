@@ -4,18 +4,15 @@ REST API for fetching GitHub Api data.
 ### Overview
   * Building in docker-compose (MongoDB+Python) and deploying on free linux AWS instance (t2.micro/EC2 service):  
 [http://ec2-52-207-234-223.compute-1.amazonaws.com:5000/](http://ec2-52-207-234-223.compute-1.amazonaws.com:5000/)
-* Aslo project could be rebuild sepearately on localhost:
+  * Aslo project could be rebuild sepearately on localhost:
 		[http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+  * Support memory object caching system - [memcached](https://hub.docker.com/_/memcached) with 5 min timeout
+  
 ### Features
 * Overview top 10 stars list github repository
 * Opportunity check detail info by git hub account login
 * Use pagination per page when fetching github api data.
-* Overview all repository with stars rate over 2000 stars.  
-Will resolve it in next version.
-(Previously was 500, but when I published my Personal access tokens on git  -
-I got the email from github:  
-> "As a precautionary measure, we have revoked the OAuth token.
-> A new token will need to be generated in order to continue using OAuth to authenticate to GitHub."
+* Overview all repository with stars rate over 10000 stars.  
 
 ### Installing
 1. __Run seperatly on localhost__
