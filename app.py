@@ -31,8 +31,8 @@ headers = {"authToken": "844b11b1bcf8d242f7791d4daf718360c52fef5b"}
 
 # init connection to MongoDB
 try:
-    # conn = MongoClient("mongodb://mongo:27017/")  # PROD_ENV
-    conn = MongoClient("mongodb://localhost:27017/git_db")  # DEV_ENV
+    conn = MongoClient("mongodb://mongo:27017/")  # PROD_ENV
+    #conn = MongoClient("mongodb://localhost:27017/git_db")  # DEV_ENV
     db = conn["git_db"]
     coll = db["git_col"]
 except ConnectionError as e:
@@ -158,5 +158,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)
-    # app.run(host='0.0.0.0', port=5000, debug=True)
+    #app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
